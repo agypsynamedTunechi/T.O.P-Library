@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>My Library</h1>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2 class="title">The Great Gatsby</h2>
+            <p class="author">F. Scott Fitzgerald</p>
+            <p class="pages">Pages: 180</p>
+            <div class="read">
+                <p>Read</p>
+                <div class="check">
+                    <span>Yes</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <button class="del">Delete</button>
+        </div>
+
+    </main>
+
+    <dialog>
+        <form action="">
+
+            <input type="text" name="title" id="title" placeholder="Title" required>
+            <input type="text" name="author" id="author" placeholder="Author" required>
+            <input type="number" name="pages" id="pages" placeholder="Pages" required>
+            <div>
+                <label for="">Have you read it?</label>
+                <select name="" id="">
+                    <option value=""></option>
+                    <option value="">Yes</option>
+                    <option value="">No</option>
+                </select>
+            </div>
+            
+            <div class="form-button">
+                <button class="submit">ADD</button>
+                <button class="cancel" formmethod="dialog" value="cancel">CANCEL</button>
+            </div>
+
+
+        </form>
+    </dialog>
+    <footer>
+        <button class="add-btn">Add Book</button>
+    </footer>
+</body>
+
+</html>
