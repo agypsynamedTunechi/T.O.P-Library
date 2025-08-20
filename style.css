@@ -135,6 +135,7 @@ button{
 }
 
 .del{
+  padding: .7rem;
   align-self: flex-end;
 }
 

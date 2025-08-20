@@ -14,14 +14,18 @@ addBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
-// cancelBtn.addEventListener("click", () => {
-//   dialog.close();
-// });
+dialog.addEventListener("close", ()=>{
+  addBookToLibrary(); 
+  displayBook();
 
-dialog.addEventListener("close", addBookToLibrary);
+});
 
 submitBtn.addEventListener("click", (event) => {
-  if(titleInput.value === "" || authorInput.value === "" || pagesInput.value === ""){
+  if (
+    titleInput.value === "" ||
+    authorInput.value === "" ||
+    pagesInput.value === ""
+  ) {
     return;
   }
   event.preventDefault();
@@ -35,16 +39,25 @@ function Book(title, author, pages) {
   this.uuid = crypto.randomUUID();
 }
 
+Book.prototype.readStatus = function (){
+  
+}
+
 function addBookToLibrary(title, author, pages) {
   const book = new Book(titleInput.value, authorInput.value, pagesInput.value);
   myLibrary.push(book);
 
+}
+
+function displayBook() {
+  main.replaceChildren("");
+  for(book of myLibrary){
   const cardDiv = document.createElement("div");
   cardDiv.classList = "card";
-  cardDiv.dataset.id = book.uuid
+  cardDiv.dataset.id = book.uuid;
   main.appendChild(cardDiv);
 
-  console.log(cardDiv.dataset.id)
+  console.log(cardDiv.dataset.id);
 
   const bookHeader = document.createElement("h2");
   bookHeader.classList = "title";
@@ -73,10 +86,6 @@ function addBookToLibrary(title, author, pages) {
   checkDiv.classList = "check";
   readDiv.appendChild(checkDiv);
 
-  const checkSpan = document.createElement("span");
-  checkSpan.textContent = "No";
-
-  checkDiv.appendChild(checkSpan);
 
   const label = document.createElement("label");
   label.classList = "switch";
@@ -84,50 +93,54 @@ function addBookToLibrary(title, author, pages) {
 
   const checkBox = document.createElement("input");
   checkBox.type = "checkbox";
-  //   checkBox.textContent = "No"
   label.appendChild(checkBox);
 
   const labelSpan = document.createElement("span");
   labelSpan.classList = "slider round";
   label.appendChild(labelSpan);
 
-  checkBox.addEventListener("click", () => {
-    if (checkSpan.textContent === "No" && checkBox.checked) {
-      checkSpan.textContent = "Yes";
-    } else {
-      checkSpan.textContent = "No";
-    }
-  });
+   const checkSpan = document.createElement("span");
+  checkSpan.textContent = "No";
 
-  if(selectEl.value === "yes"){
+  checkDiv.appendChild(checkSpan);
+
+  if (selectEl.value === "yes") {
     checkSpan.textContent = "Yes";
     checkBox.checked = true;
-  }else{
-    checkSpan.textContent = "No"
+  } else {
+    checkSpan.textContent = "No";
   }
+
+  checkBox.addEventListener("click", () => {
+  if (checkSpan.textContent === "No" && checkBox.checked) {
+    checkSpan.textContent = "Yes";
+  } else {
+    checkSpan.textContent = "No";
+  }
+});
 
   const delBtn = document.createElement("button");
   delBtn.textContent = "Delete";
   delBtn.classList = "del";
   cardDiv.appendChild(delBtn);
 
-  delBtn.addEventListener("click", ()=>{
-    
-   for(let i = 0; i < myLibrary.length; i++){
-    const index = myLibrary.indexOf(myLibrary[i]);
-    if(myLibrary[i].uuid === cardDiv.dataset.id){
-      myLibrary.splice(index, 1);
-      cardDiv.remove()
-    }
-   }
-
-
-  })
-
   titleInput.value = "";
   authorInput.value = "";
   pagesInput.value = "";
-  selectEl.value = "default"
+  selectEl.value = "default";
+
+  delBtn.addEventListener("click", () => {
+  for (let i = 0; i < myLibrary.length; i++) {
+    const index = myLibrary.indexOf(myLibrary[i]);
+    if (myLibrary[i].uuid === cardDiv.dataset.id) {
+      myLibrary.splice(index, 1);
+      cardDiv.remove();
+    }
+  }
+});
+  }
 }
 
-// addBookToLibrary();
+
+
+
