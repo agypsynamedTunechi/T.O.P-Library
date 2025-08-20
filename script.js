@@ -21,6 +21,9 @@ addBtn.addEventListener("click", () => {
 dialog.addEventListener("close", addBookToLibrary);
 
 submitBtn.addEventListener("click", (event) => {
+  if(titleInput.value === "" || authorInput.value === "" || pagesInput.value === ""){
+    return;
+  }
   event.preventDefault();
   dialog.close();
 });
