@@ -32,20 +32,24 @@ submitBtn.addEventListener("click", (event) => {
   dialog.close();
 });
 
-function Book(title, author, pages) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.uuid = crypto.randomUUID();
-}
 
-Book.prototype.readStatus = function (){
+class Book{
+  constructor(title, author, pages, readStatus){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+    this.uuid = crypto.randomUUID();
+  }
   
+
+
 }
 
 function addBookToLibrary(title, author, pages) {
-  const book = new Book(titleInput.value, authorInput.value, pagesInput.value);
+  const book = new Book(titleInput.value, authorInput.value, pagesInput.value, selectEl.value);
   myLibrary.push(book);
+  console.log(book)
 
 }
 
